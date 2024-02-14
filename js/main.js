@@ -1,5 +1,4 @@
 import questions from "./questions.js"
-import { imagens } from "./imagens.js"
 
 const startGameButton = document.querySelector(".start-quiz")
 const nextQuestionButton = document.querySelector(".next-question")
@@ -9,6 +8,7 @@ const answerContainer = document.querySelector(".answers-container")
 
 let index = 0
 let totalCorrect = 0
+let shuffledQuestions = []
 
 startGameButton.addEventListener("click", startGame)
 nextQuestionButton.addEventListener("click", displayNextQuestion)
@@ -16,30 +16,31 @@ nextQuestionButton.addEventListener("click", displayNextQuestion)
 function startGame() {
   startGameButton.classList.add("hide")
   questionContainer.classList.remove("hide")
+  shuffledQuestions = shuffle(questions)
   displayNextQuestion()
 }
 
 function displayNextQuestion() {
   resetState()
-
-  if (questions.length === index) {
+  
+  if (shuffledQuestions.length === index) {
     return finishGame()
   }
 
-  questionText.textContent = questions[index].question
-  questions[index].answers.forEach(answer => {
-    const newAsnwer = document.createElement("button")
-    newAsnwer.classList.add("button", "answer")
-    newAsnwer.textContent = answer.text
+  questionText.textContent = shuffledQuestions[index].question
+  shuffledQuestions[index].answers.forEach(answer => {
+    const newAnswer = document.createElement("button")
+    newAnswer.classList.add("button", "answer")
+    newAnswer.textContent = answer.text
     if (answer.correct) {
-      newAsnwer.dataset.correct = answer.correct
+      newAnswer.dataset.correct = answer.correct
     }
-    answerContainer.appendChild(newAsnwer)
+    answerContainer.appendChild(newAnswer)
 
-    newAsnwer.addEventListener("click", selectAnswer)
+    newAnswer.addEventListener("click", selectAnswer)
   })
 
-  document.querySelector(".imagem").src = imagens[index]
+  document.querySelector(".imagem").src = questions[index].imagem
 }
 
 function resetState() {
@@ -70,15 +71,15 @@ function selectAnswer(event) {
       button.classList.add("incorrect")
     }
   })
-
+  
   nextQuestionButton.classList.remove("hide")
   index++
 }
 
 function finishGame() {
-  const totalQuestions = questions.length
+  const totalQuestions = shuffledQuestions.length
   const performance = Math.floor(totalCorrect * 100 / totalQuestions)
-
+  
   let message = ""
 
   switch (true) {
@@ -109,3 +110,16 @@ function finishGame() {
     </button>
   `
 }
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+  return array
+}
+
+
+
