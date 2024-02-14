@@ -1,21 +1,21 @@
 import questions from "./questions.js"
 import { imagens } from "./imagens.js"
 
-const iniciarJogo = document.querySelector(".start-quiz")
-const proximaQuestao = document.querySelector(".next-question")
-const questoesContainer = document.querySelector(".questions-container")
-const questaoTexto = document.querySelector(".question")
-const respostaContainer = document.querySelector(".answers-container")
+const startGameButton = document.querySelector(".start-quiz")
+const nextQuestionButton = document.querySelector(".next-question")
+const questionContainer = document.querySelector(".questions-container")
+const questionText = document.querySelector(".question")
+const answerContainer = document.querySelector(".answers-container")
 
 let index = 0
-let totalCorreto = 0
+let totalCorrect = 0
 
-iniciarJogo.addEventListener("click", startGame)
-proximaQuestao.addEventListener("click", displayNextQuestion)
+startGameButton.addEventListener("click", startGame)
+nextQuestionButton.addEventListener("click", displayNextQuestion)
 
 function startGame() {
-  iniciarJogo.classList.add("hide")
-  questoesContainer.classList.remove("hide")
+  startGameButton.classList.add("hide")
+  questionContainer.classList.remove("hide")
   displayNextQuestion()
 }
 
@@ -26,7 +26,7 @@ function displayNextQuestion() {
     return finishGame()
   }
 
-  questaoTexto.textContent = questions[index].question
+  questionText.textContent = questions[index].question
   questions[index].answers.forEach(answer => {
     const newAsnwer = document.createElement("button")
     newAsnwer.classList.add("button", "answer")
@@ -34,7 +34,7 @@ function displayNextQuestion() {
     if (answer.correct) {
       newAsnwer.dataset.correct = answer.correct
     }
-    respostaContainer.appendChild(newAsnwer)
+    answerContainer.appendChild(newAsnwer)
 
     newAsnwer.addEventListener("click", selectAnswer)
   })
@@ -43,15 +43,22 @@ function displayNextQuestion() {
 }
 
 function resetState() {
-  while(respostaContainer.firstChild) {
-    respostaContainer.removeChild(respostaContainer.firstChild)
+  while(answerContainer.firstChild) {
+    answerContainer.removeChild(answerContainer.firstChild)
   }
 
   document.body.removeAttribute("class")
-  proximaQuestao.classList.add("hide")
+  nextQuestionButton.classList.add("hide")
 }
 
 function selectAnswer(event) {
+  const answerClicked = event.target
+
+  if (answerClicked.dataset.correct) {
+    document.body.classList.add("correct")
+    totalCorrect++
+  } 
+
   document.querySelectorAll(".answer").forEach(button => {
     button.disabled = true
 
@@ -62,13 +69,13 @@ function selectAnswer(event) {
     }
   })
 
-  proximaQuestao.classList.remove("hide")
+  nextQuestionButton.classList.remove("hide")
   index++
 }
 
 function finishGame() {
   const totalQuestions = questions.length
-  const performance = Math.floor(totalCorreto * 100 / totalQuestions)
+  const performance = Math.floor(totalCorrect * 100 / totalQuestions)
 
   let message = ""
 
@@ -86,10 +93,10 @@ function finishGame() {
       message = "Pode melhorar :("
   }
 
-  questoesContainer.innerHTML = 
+  questionContainer.innerHTML = 
   `
     <p class="final-message">
-      Você acertou ${totalCorreto} de ${totalQuestions} questões!
+      Você acertou ${totalCorrect} de ${totalQuestions} questões!
       <span>Resultado: ${message}</span>
     </p>
     <button 
