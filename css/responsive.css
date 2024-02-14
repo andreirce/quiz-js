@@ -1,0 +1,73 @@
+@media (max-width: 1024px){
+    body{
+        background-size: cover;
+    }
+
+    .container {
+      width: 75%;
+    }
+
+    .question{
+        font-size: 20px;
+    }
+
+    .button{
+        padding: 0 25px;
+        font-size: 14px;
+        height: 45px;
+    }
+
+    .imagem{
+        width: 280px;
+    }
+  }
+
+  @media (max-width: 768px){
+
+    .container{
+        width: 80%;
+    }
+
+    .question{
+        font-size: 1.3rem;
+    }
+
+    .answers-container{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        padding: 0 10px;
+    }
+
+    .imagem{
+        width: 55%;
+    }
+  }
+
+  @media (max-width: 768px){
+
+  }
+
+  @media (max-width: 520px){
+    .container{
+        width: 90%;
+    }
+
+    .question{
+        font-size: 1.2rem;
+    }
+
+    .answers-container{
+        width: 100%;
+    }
+
+    .imagem{
+        width: 65%;
+    }
+
+    .button{
+        font-size: 13px;
+        height: 40px;
+    }
+
+  }
