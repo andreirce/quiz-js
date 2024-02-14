@@ -5,9 +5,14 @@
   }
 
   body {
-    background: url("../src/imagens/cristo--redentor.jpg");
-    background-size: cover;
     color: #fff;
+    background-color: #1c1c1c;
+  }
+
+  #background-img{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
   }
 
   main{
@@ -25,8 +30,10 @@
   .container {
     background-color: rgba(0, 0, 0, 0.671);
     width: 90%;
-    max-width: 800px;
+    max-width: 500px;
 
+    position: absolute;
+    z-index: 1;
     border: 2px solid #e1e1e6;
     border-radius: 6px;
     padding: 16px;
@@ -84,7 +91,6 @@
     filter: brightness(0.8);
   }
 
-  /* Finish game */
   .final-message {
     font-size: 20px;
     text-align: center;
@@ -95,7 +101,6 @@
     margin-top: 8px;
   }
 
-  /* General styles */
   .hide {
     display: none;
   }

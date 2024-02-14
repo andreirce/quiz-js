@@ -57,7 +57,9 @@ function selectAnswer(event) {
   if (answerClicked.dataset.correct) {
     document.body.classList.add("correct")
     totalCorrect++
-  } 
+  } else{
+    document.body.classList.add("incorrect")
+  }
 
   document.querySelectorAll(".answer").forEach(button => {
     button.disabled = true
