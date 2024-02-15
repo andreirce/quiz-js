@@ -18,16 +18,34 @@ function startGame() {
   questionContainer.classList.remove("hide")
   shuffledQuestions = shuffle(questions)
   displayNextQuestion()
+  // timeQuestion()
+  
+}
+
+function timeQuestion() {
+  var count = 15;
+  var interval = setInterval(function(){
+    document.getElementById('countdown').innerHTML=count;
+    count--;
+    if (count === 0){
+      clearInterval(interval);
+      document.getElementById('countdown').innerHTML='Done';
+     
+      alert("Acabou o seu tempo!");
+    }
+  }, 1000);
+
 }
 
 function displayNextQuestion() {
   resetState()
+  timeQuestion()
   
   if (shuffledQuestions.length === index) {
     return finishGame()
   }
-
-  questionText.textContent = shuffledQuestions[index].question
+  
+ questionText.textContent = shuffledQuestions[index].question
   shuffledQuestions[index].answers.forEach(answer => {
     const newAnswer = document.createElement("button")
     newAnswer.classList.add("button", "answer")
