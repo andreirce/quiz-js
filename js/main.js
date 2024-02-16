@@ -43,8 +43,6 @@ function timeQuestion() {
     document.getElementById('countdown').innerHTML=count;
     if (count <= 0){
       clearInterval(interval);
-      document.getElementById('countdown').innerHTML='Done';
-     
       alert("Acabou o seu tempo!");
       window.location.reload()
     }else{
