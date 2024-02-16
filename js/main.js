@@ -5,7 +5,10 @@ const nextQuestionButton = document.querySelector(".next-question")
 const questionContainer = document.querySelector(".questions-container")
 const questionText = document.querySelector(".question")
 const answerContainer = document.querySelector(".answers-container")
+const title = document.querySelector(".title")
+const countdown = document.getElementById("countdown")
 
+let interval;
 let index = 0
 let totalCorrect = 0
 let shuffledQuestions = []
@@ -15,31 +18,33 @@ nextQuestionButton.addEventListener("click", displayNextQuestion)
 
 function startGame() {
   startGameButton.classList.add("hide")
+  title.classList.add("hide")
+  countdown.classList.remove("hide")
   questionContainer.classList.remove("hide")
   shuffledQuestions = shuffle(questions)
   displayNextQuestion()
-  // timeQuestion()
-  
 }
 
 function timeQuestion() {
-  var count = 15;
-  var interval = setInterval(function(){
+  var count = 10;
+  clearInterval(interval)
+   interval = setInterval(function(){
     document.getElementById('countdown').innerHTML=count;
-    count--;
-    if (count === 0){
+    if (count <= 0){
       clearInterval(interval);
       document.getElementById('countdown').innerHTML='Done';
      
       alert("Acabou o seu tempo!");
+      window.location.reload()
+    }else{
+      count--;
     }
   }, 1000);
-
 }
 
 function displayNextQuestion() {
   resetState()
-  timeQuestion()
+  countdown.classList.remove("hide")
   
   if (shuffledQuestions.length === index) {
     return finishGame()
@@ -57,6 +62,10 @@ function displayNextQuestion() {
 
     newAnswer.addEventListener("click", selectAnswer)
   })
+
+  
+  clearInterval(interval)
+  timeQuestion()
 
   document.querySelector(".imagem").src = questions[index].imagem
 }
@@ -76,8 +85,10 @@ function selectAnswer(event) {
   if (answerClicked.dataset.correct) {
     document.body.classList.add("correct")
     totalCorrect++
+    clearInterval(interval);
   } else{
     document.body.classList.add("incorrect")
+    clearInterval(interval);
   }
 
   document.querySelectorAll(".answer").forEach(button => {
