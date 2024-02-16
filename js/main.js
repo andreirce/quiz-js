@@ -14,6 +14,7 @@ let shuffledQuestions = []
 startGameButton.addEventListener("click", startGame)
 nextQuestionButton.addEventListener("click", displayNextQuestion)
 
+?
 function startGame() {
   startGameButton.classList.add("hide")
   tittle.classList.add("hide")
@@ -34,14 +35,15 @@ function startGame() {
 //       document.getElementById('countdown').innerHTML='Done';
      
 //       alert("Acabou o seu tempo!");
-//     }
+//     } 
+      
 //   }, 1000);
 
 // }
 
 function displayNextQuestion() {
   resetState()
-  timeQuestion()
+  
   
   if (shuffledQuestions.length === index) {
     return finishGame()
