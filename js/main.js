@@ -5,6 +5,7 @@ const nextQuestionButton = document.querySelector(".next-question")
 const questionContainer = document.querySelector(".questions-container")
 const questionText = document.querySelector(".question")
 const answerContainer = document.querySelector(".answers-container")
+const tittle = document.querySelector("tittle")
 
 let index = 0
 let totalCorrect = 0
@@ -15,6 +16,7 @@ nextQuestionButton.addEventListener("click", displayNextQuestion)
 
 function startGame() {
   startGameButton.classList.add("hide")
+  tittle.classList.add("hide")
   questionContainer.classList.remove("hide")
   shuffledQuestions = shuffle(questions)
   displayNextQuestion()
