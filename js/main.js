@@ -15,6 +15,9 @@ let shuffledQuestions = []
 
 startGameButton.addEventListener("click", startGame)
 nextQuestionButton.addEventListener("click", displayNextQuestion)
+ 
+var nome = prompt("Qual é o seu nome?");
+window.alert( `Olá, ${nome}! Pronto para essa aventura? `);
 
 function startGame() {
   startGameButton.classList.add("hide")
