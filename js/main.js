@@ -16,8 +16,15 @@ let shuffledQuestions = []
 startGameButton.addEventListener("click", startGame)
 nextQuestionButton.addEventListener("click", displayNextQuestion)
  
-var nome = prompt("Qual é o seu nome?");
-window.alert( `Olá, ${nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase()}! Pronto para essa aventura? `);
+function name(){
+  let nome = prompt("Qual é o seu nome?");
+  if(nome == ""){
+    while(nome == ""){
+      nome = prompt("Por favor, digite o seu nome!")
+    }
+  }
+  alert( `Olá, ${nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase()}! Pronto para essa aventura? `);
+}
 
 function startGame() {
   startGameButton.classList.add("hide")
@@ -26,6 +33,7 @@ function startGame() {
   questionContainer.classList.remove("hide")
   shuffledQuestions = shuffle(questions)
   displayNextQuestion()
+  name()
 }
 
 function timeQuestion() {
