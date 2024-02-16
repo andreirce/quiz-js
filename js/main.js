@@ -108,6 +108,7 @@ function selectAnswer(event) {
 function finishGame() {
   const totalQuestions = shuffledQuestions.length
   const performance = Math.floor(totalCorrect * 100 / totalQuestions)
+  countdown.classList.add("hide")
   
   let message = ""
 
